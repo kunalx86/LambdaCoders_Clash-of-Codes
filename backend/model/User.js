@@ -6,11 +6,11 @@ const userSchema = new mongoose.Schema({
     lastName: String,
     gender: String,
     DOB: Date,
+    age: Number,
     interests: [String],
-    collegeName: String,
     location: GeoSchema,
     photos: [String],
-    sexualOrientation: String,
+    sexualOrientation: [String],
     height: Number,
     score: Number,
     bio: String,
@@ -18,12 +18,12 @@ const userSchema = new mongoose.Schema({
         type: [mongoose.Schema.Types.ObjectId],
         default: []
     },
-    dislikes: [mongoose.Schema.Types.ObjectId]
-
-
-
-
-
+    dislikes: [mongoose.Schema.Types.ObjectId],
+    mobileNo: Number,
+    ageRange: [Number],
+    matches: Number,
+    radius: Number,
+    lookingFor: String
 },
     { timestamps: true }
 );
