@@ -1,10 +1,10 @@
+/* Importing data and models*/
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-
-/* Importing data and models*/
+import userRouter from "./routes/user.js";
 
 
 
@@ -25,6 +25,7 @@ app.get("/", (req, res) => {
     res.send("Server is running");
 })
 
+app.use("/user", userRouter);
 
 /* Mongodb connection */
 
