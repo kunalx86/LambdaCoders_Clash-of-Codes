@@ -1,7 +1,9 @@
-import { auth } from "@/firebase";
+import { initFirebase } from "@/firebase";
 import { getAuth, onAuthStateChanged, signInWithPhoneNumber } from "@firebase/auth";
 
-const { createContext, useState, useEffect, useContext } = require("react");
+import { createContext, useState, useEffect, useContext } from "react";
+
+const auth = getAuth();
 
 const AuthContext = createContext({
   user: null,
