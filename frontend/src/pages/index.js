@@ -1,12 +1,8 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
-import {
-  BiChevronLeft,
-  BiBell,
-  BiCurrentLocation,
-  BiPin,
-} from "react-icons/bi";
+import { BiChevronLeft, BiBell, BiPin } from "react-icons/bi";
 import Image from "next/image";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,10 +15,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="">
+      <main className="bg-slate-100">
         {/* Header */}
-        <div className="flex flex-col items-start gap-8">
-          <div className="flex flex-row items-center h-[42px]">
+        <div className="flex flex-col shadow-2xl rounded-2xl px-4 items-start gap-8">
+          <div className="flex flex-row items-center h-[48px]">
             <div className="flex flex-row items-center w-[118.5px] gap-5 px-[9px] pt-[9px] pb-[9px]">
               <BiChevronLeft height={"14px"} width={"24px"} fontSize={"18px"} />
             </div>
@@ -40,7 +36,7 @@ export default function Home() {
         <div className="flex justify-center items-center flex-col mt-4">
           <div className="relative w-[327px] h-[495px]">
             <Image
-              className="self-center object-cover"
+              className="self-center object-cover rounded-2xl shadow-2xl"
               alt="name"
               src={"/icons/IMG.png"}
               width={327}
@@ -61,7 +57,7 @@ export default function Home() {
         {/* Buttons section */}
         <div className="p-8 items-center justify-center mx-[10%] flex flex-row">
           {/* <div className="flex flex-row"> */}
-          <div className="bg-white shadow-lg mx-4 rounded-full w-[60px] h-[60px]">
+          <div className="bg-white hover:shadow-2xl shadow-lg mx-4 rounded-full w-[60px] h-[60px]">
             <Image
               className="self-center mx-auto mt-5"
               src="/icons/dislike.PNG"
@@ -72,7 +68,7 @@ export default function Home() {
           </div>
           {/* </div> */}
           {/* <div className="flex flex-row"> */}
-          <div className="bg-white shadow-lg mx-4 rounded-full w-[71px] h-[71px]">
+          <div className="bg-white hover:shadow-2xl shadow-lg mx-4 rounded-full w-[71px] h-[71px]">
             <Image
               className="self-center mx-auto mt-5"
               src="/icons/superLike.PNG"
@@ -83,7 +79,7 @@ export default function Home() {
           </div>
           {/* </div> */}
           {/* <div className="flex flex-row"> */}
-          <div className="bg-white shadow-lg mx-4 rounded-full w-[60px] h-[60px]">
+          <div className="bg-white hover:shadow-2xl shadow-lg mx-4 rounded-full w-[60px] h-[60px]">
             <Image
               className="self-center mx-auto mt-5"
               src="/icons/like.PNG"
@@ -95,7 +91,7 @@ export default function Home() {
           {/* </div> */}
         </div>
         {/* Footer */}
-        <div className="flex flex-col p-0 w-[375px] h-[82px]"></div>
+        <Footer /> 
       </main>
     </>
   );
