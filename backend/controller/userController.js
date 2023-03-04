@@ -186,10 +186,10 @@ export const userSuggestions = async (req, res) => {
                         $in: _user.sexualOrientation
                     },
                     age: {
-                        $in: [_user.ageRange[0], _user.ageRange[1]]
+                        $gt: _user.ageRange[0], $lt: _user.ageRange[1]
                     },
                     score: {
-                        $in: [_user.score - 20, _user.score + 20]
+                        $gt: _user.score - 20, $lt: _user.score + 20
                     },
                     lookingFor: {
                         $in: ["prefereNotToSay", _user.lookingFor]
