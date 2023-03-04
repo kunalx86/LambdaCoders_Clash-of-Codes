@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { BiChevronRight } from "react-icons/bi";
 
 export default function CommonScreen({
@@ -8,6 +9,10 @@ export default function CommonScreen({
   children,
 }) {
   return (
+    <>
+    <Head>
+      <title>Profile Creation</title>
+    </Head>
     <div className="p-8 mt-4">
       <div className="w-full bg-gray-200 rounded-full h-2.5">
         <div
@@ -24,5 +29,6 @@ export default function CommonScreen({
         </button>
       </div>
     </div>
+    </>
   );
 }
