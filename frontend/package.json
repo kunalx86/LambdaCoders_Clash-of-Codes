@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mobiscroll/react": "https://npm.mobiscroll.com/@mobiscroll/react-trial/-/react-trial-5.22.2.tgz",
     "firebase": "^9.17.2",
     "next": "13.2.3",
     "react": "18.2.0",

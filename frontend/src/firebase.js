@@ -21,6 +21,7 @@ export const app = initializeApp(firebaseConfig);
 export const auth = initializeAuth(app);
 auth.setPersistence(browserSessionPersistence)
 
+
 if (typeof window !== "undefined") {
   window.recaptchaVerifier = new RecaptchaVerifier(
     "captcha",
