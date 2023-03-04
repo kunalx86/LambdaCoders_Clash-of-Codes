@@ -17,7 +17,7 @@ export default function OtpConfirmPage() {
         //   otp: otp.join(""),
         // });
         console.log(date)
-        router.push("/create/sexuality");
+        router.push("/create/gender");
       }}
     >
       <div className="flex flex-col p-4">

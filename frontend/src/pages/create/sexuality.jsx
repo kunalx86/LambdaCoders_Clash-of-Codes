@@ -23,15 +23,16 @@ export default function OtpConfirmPage() {
         //   otp: otp.join(""),
         // });
         console.log(date)
-        // router.push("/otp-confirm");
+        router.push("/create/interests");
       }}
     >
       <div className="flex flex-col p-4">
         <h1 className="text-4xl font-bold">What's your sexuality?</h1>
-        <div className="flex flex-col space-y-4 mx-auto">
+        <div className="flex flex-col space-y-4 mx-[10%] mt-4">
           {
             sexualities.map(sexuality => (
-              <div key={sexuality} className="border-b-gray-400">
+              <div key={sexuality} className="border-b-2 border-b-gray-400 p-2 hover:border-2 hover:border-gray-400 hover:rounded-lg">
+                <h3 className="text-lg">{sexuality}</h3>
               </div>
             ))
           }

@@ -11,9 +11,9 @@ export default function OtpConfirmPage() {
     <CommonScreen
       percent={"20"}
       onClick={async () => {
-        // await confirmOTP({
-        //   otp: otp.join(""),
-        // });
+        await confirmOTP({
+          otp: otp.join(""),
+        });
         router.push("/create/name");
       }}
     >

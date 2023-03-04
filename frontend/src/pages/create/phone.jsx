@@ -9,9 +9,9 @@ export default function PhonePage() {
   const router = useRouter();
   return (
     <CommonScreen percent={"10"} onClick={async () => {
-      // await loginWithPhone({
-      //   phoneNo: "+91" + phoneNo.split(" ").join("")
-      // });
+      await loginWithPhone({
+        phoneNo: "+91" + phoneNo.split(" ").join("")
+      });
       router.push("/create/otp-confirm")
     }}>
       <div className="flex flex-col p-4">
