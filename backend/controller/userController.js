@@ -10,7 +10,7 @@ export const editProfile = async (req, res) => {
 
             data.location = JSON.parse(req.body.location)
         }
-        await User.find({ email }).then(async (_user) => {
+        await User.findOne({ email }).then(async (_user) => {
             if (_user.length !== 0 && email) {
                 const __user = await User.findByIdAndUpdate(_user[0]._id, data, { new: true })
                 return res.status(203).json(__user)
