@@ -8,7 +8,7 @@ import { useAuth } from "@/providers/AuthProvider";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useMutation, useQuery } from "react-query";
-import { axios, axiosFlask } from "@/axios";
+import { axios } from "@/axios";
 
 const inter = Inter({ subsets: ["latin"] });
 

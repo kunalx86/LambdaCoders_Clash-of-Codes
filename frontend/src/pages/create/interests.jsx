@@ -1,9 +1,10 @@
 import CommonScreen from "@/components/CommonScreen";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { useGeolocation } from "rooks";
 import { useMutation } from "react-query";
-import { axios } from "@/axios";
+import { URL } from "../../axios";
+import axios from "axios";
+import { useAuth } from "@/providers/AuthProvider";
 
 const interests = [
   "Camping 🏕️",
@@ -25,36 +26,20 @@ export default function OtpConfirmPage() {
   const { isLoading, mutateAsync } = useMutation((data) =>
     axios.post("/user/editProfile", data)
   );
-  const geolocation = useGeolocation();
+  const data = useAuth()?.user;
   const [selectedInterests, setSelectedInterests] = useState([]);
   return (
     <CommonScreen
       percent={"72.5"}
       onClick={async () => {
-        const firstName = localStorage.getItem("firstname");
-        const lastName = localStorage.getItem("lastname");
-        const DOB = new Date(JSON.parse(localStorage.getItem("dob")));
-        const gender = localStorage.getItem("gender");
-        const sexualOrientation = JSON.parse(localStorage.getItem("sexuality"));
-        const mobileNo = localStorage.getItem("phone");
-        const value = {
-          firstName,
-          lastName,
-          DOB,
-          gender,
-          sexualOrientation,
-          mobileNo,
-          ageRange: [],
-          radius: 1000,
-          lookingFor: "",
-          location: {
-            type: "Point",
-            coordinates: [geolocation.lat, geolocation.lng],
-          },
-        };
-        await mutateAsync(value)
-        console.log(value);
-        router.push("/create/done");
+        // router.push("/");
+        localStorage.setItem("interests", selectedInterests)
+        axios.post(URL + "/user/editProfile", { interests: selectedInterests, mobileNo: parseInt(data.phoneNumber) }).then((res) => {
+          console.log(res);
+          router.push("/");
+        }).catch((err) => {
+          console.log(err)
+        })
       }}
     >
       <div className="flex flex-col p-4">
@@ -69,16 +54,15 @@ export default function OtpConfirmPage() {
               onClick={(e) => {
                 selectedInterests.includes(interest)
                   ? setSelectedInterests((s) =>
-                      s.filter((intrst) => intrst !== interest)
-                    )
+                    s.filter((intrst) => intrst !== interest)
+                  )
                   : setSelectedInterests((s) => [...s, interest]);
               }}
               key={interest}
               className={`flex flex-row border-2 border-slate-200 p-4 hover:bg-brand.green.dark hover:text-white hover:rounded-xl rounded-2xl justify-between items-center
-                ${
-                  selectedInterests.includes(interest)
-                    ? "bg-brand.green.dark text-white hover:bg-white hover:text-black"
-                    : ""
+                ${selectedInterests.includes(interest)
+                  ? "bg-brand.green.dark text-white hover:bg-white hover:text-black"
+                  : ""
                 }
               `}
             >
