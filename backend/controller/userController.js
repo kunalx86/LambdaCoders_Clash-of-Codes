@@ -229,6 +229,43 @@ export const userSuggestions = async (req, res) => {
                     }
                 ).sort({ _id: -1 }).sort({ matches: 1 }).limit(100);
                 suggestedUsers = suggestedUsers.concat(suggestedUsers_2)
+                if (suggestedUsers.length < 10) {
+                    const suggestedUsers_3 = await User.find({
+                        gender: {
+                            $in: _user.sexualOrientation
+                        },
+                        lookingFor: {
+                            $in: ["prefereNotToSay", _user.lookingFor]
+                        },
+                        sexualOrientation: _user.gender,
+                    }).sort({ _id: -1 }).sort({ matches: 1 }).limit(100);
+
+                    suggestedUsers = suggestedUsers.concat(suggestedUsers_3)
+
+                }
+                if (suggestedUsers.length < 10) {
+                    const suggestedUsers_4 = await User.find({
+                        gender: {
+                            $in: _user.sexualOrientation
+                        },
+                        sexualOrientation: _user.gender,
+                    }).sort({ _id: -1 }).sort({ matches: 1 }).limit(100);
+
+                    suggestedUsers = suggestedUsers.concat(suggestedUsers_4)
+
+                }
+                if (suggestedUsers.length < 10) {
+                    const suggestedUsers_5 = await User.find({
+                        gender: {
+                            $in: _user.sexualOrientation
+                        },
+
+                    }).sort({ _id: -1 }).sort({ matches: 1 }).limit(100);
+
+                    suggestedUsers = suggestedUsers.concat(suggestedUsers_5)
+
+                }
+
             }
 
             shuffleArray(suggestedUsers)
