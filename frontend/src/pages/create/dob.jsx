@@ -13,10 +13,8 @@ export default function OtpConfirmPage() {
     <CommonScreen
       percent={"40"}
       onClick={async () => {
-        // await confirmOTP({
-        //   otp: otp.join(""),
-        // });
         console.log(date)
+        localStorage.setItem("dob", JSON.stringify(date));
         router.push("/create/gender");
       }}
     >

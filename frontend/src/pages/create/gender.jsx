@@ -8,10 +8,12 @@ const genders = ["Man", "Woman", "Prefer Not to Say"];
 
 export default function OtpConfirmPage() {
   const router = useRouter();
+  const [selectedGender, setSelectedGender] = useState("");
   return (
     <CommonScreen
       percent={"40"}
       onClick={async () => {
+        localStorage.setItem("gender", selectedGender)
         router.push("/create/sexuality");
       }}
     >
@@ -22,6 +24,7 @@ export default function OtpConfirmPage() {
             <div
               key={gender}
               className="flex flex-row border-2 border-slate-200 p-4 hover:bg-brand.green.dark hover:text-white hover:rounded-xl rounded-2xl justify-between items-center"
+              onClick={e => setSelectedGender(gender)}
             >
               <h3 className="text-lg">{gender}</h3>
               <span><BiChevronRight /></span>

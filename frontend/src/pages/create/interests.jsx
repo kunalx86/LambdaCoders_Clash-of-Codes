@@ -26,7 +26,7 @@ export default function OtpConfirmPage() {
     <CommonScreen
       percent={"40"}
       onClick={async () => {
-        router.push("/");
+        // router.push("/");
       }}
     >
       <div className="flex flex-col p-4">

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 export default function OtpConfirmPage() {
-  const { confirmOTP } = useAuth();
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const router = useRouter();
@@ -12,9 +11,8 @@ export default function OtpConfirmPage() {
     <CommonScreen
       percent={"30"}
       onClick={async () => {
-        // await confirmOTP({
-        //   otp: otp.join(""),
-        // });
+        localStorage.setItem("firstname", firstname)
+        localStorage.setItem("lastname", lastname)
         router.push("/create/dob");
       }}
     >
