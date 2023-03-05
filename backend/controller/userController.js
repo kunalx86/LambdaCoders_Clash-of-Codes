@@ -31,6 +31,7 @@ export const editProfile = async (req, res) => {
     try {
         const { mobileNo } = req.body;
         const data = req.body;
+        console.log(data)
 
         if (data.location) {
 
@@ -39,9 +40,9 @@ export const editProfile = async (req, res) => {
         if (data.ageRange) {
             data.ageRange = JSON.parse(req.body.ageRange)
         }
-        if (data.sexualOrientation) {
-            data.sexualOrientation = JSON.parse(req.body.sexualOrientation)
-        }
+        // if (data.sexualOrientation) {
+        //     data.sexualOrientation = JSON.parse(req.body.sexualOrientation)
+        // }
 
         if (data.DOB) {
             data.age = calculate_age(new Date(data.DOB.slice(0, 10)))
@@ -72,13 +73,15 @@ export const like = async (req, res) => {
         await User.findOne({ mobileNo }).then(async (_user) => {
 
             if (_user && mobileNo) {
-                _user.likes.push(userId)
-                const __user = await User.findByIdAndUpdate(_user._id, _user, { new: true })
-                const match = new Matches({ matchMaker: _user._id, matched: userId })
-                match.save();
-                return res.status(203).json(__user)
+                await User.findById(userId).then(async (___user) => {
+                    ___user.matches = ___user.matches + 1
+                    ___user.likes.push(_user._id)
+                    const match = new Matches({ matchMaker: _user._id, matched: userId })
+                    match.save();
+                    await User.findByIdAndUpdate(___user._id, ___user, { new: true })
+                    return res.status(203).json(___user)
 
-
+                })
             } else {
                 res.status(403).json("User with mobileNo not found")
             }
@@ -94,13 +97,13 @@ export const dislike = async (req, res) => {
         const { mobileNo } = req.body;
         const { userId } = req.body;
         await User.findOne({ mobileNo }).then(async (_user) => {
-
             if (_user && mobileNo) {
-                _user.dislikes.push(userId)
-                const __user = await User.findByIdAndUpdate(_user._id, _user, { new: true })
-                return res.status(203).json(__user)
+                await User.findById(userId).then(async (___user) => {
+                    ___user.dislikes.push(_user._id)
+                    await User.findByIdAndUpdate(___user._id, ___user, { new: true })
+                    return res.status(203).json(___user)
 
-
+                })
             } else {
                 res.status(403).json("User with mobileNo not found")
             }
@@ -137,6 +140,7 @@ export const getUser = async (req, res) => {
 
 
 export const addPhotos = async (req, res) => {
+    console.log("hello");
     const { mobileNo } = req.body;
     let photos = req.files;
     photos = Object.values(photos);
@@ -161,10 +165,14 @@ export const addPhotos = async (req, res) => {
 
 
             } else {
+                console.log("user with mobile")
+
                 res.status(403).json("User with mobileNo not found")
             }
         })
     } else {
+        console.log("invalid mobile")
+
         res.status(403).json("Please provide mobileNo address")
     }
 
