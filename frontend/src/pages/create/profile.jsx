@@ -47,9 +47,10 @@ export default function OtpConfirmPage() {
     const router = useRouter();
     return (
         <>
-            <Modal
+            <Modal Modal
                 isOpen={open}
-                onRequestClose={() => setOpen(false)}
+                onRequestClose={() => setOpen(false)
+                }
                 style={customStyles}
                 contentLabel="Example Modal"
             >
@@ -86,7 +87,7 @@ export default function OtpConfirmPage() {
                     )}
                 </form>
                 <button className="bg-white text-brand.green border mt-3 text-lg rounded-lg p-2" onClick={() => setOpen(false)}>close</button>
-            </Modal>
+            </Modal >
             <div className="flex p-4 ">
                 <h1 className="text-4xl font-bold text-left">Profile strength</h1>
             </div>
