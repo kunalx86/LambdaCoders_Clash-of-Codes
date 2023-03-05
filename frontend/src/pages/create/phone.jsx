@@ -13,7 +13,7 @@ export default function PhonePage() {
       onClick={async () => {
         localStorage.setItem("phone", phoneNo)
         await loginWithPhone({
-          phoneNo: "+91" + phoneNo.split(" ").join(""),
+          phoneNo: parseInt("+91" + phoneNo.split(" ").join("")),
         });
         router.push("/create/otp-confirm");
       }}
