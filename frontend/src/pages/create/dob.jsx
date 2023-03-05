@@ -11,7 +11,7 @@ export default function OtpConfirmPage() {
   const router = useRouter();
   return (
     <CommonScreen
-      percent={"40"}
+      percent={"58"}
       onClick={async () => {
         console.log(date)
         localStorage.setItem("dob", JSON.stringify(date));

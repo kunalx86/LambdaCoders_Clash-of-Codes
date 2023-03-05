@@ -9,7 +9,7 @@ export default function OtpConfirmPage() {
   const router = useRouter();
   return (
     <CommonScreen
-      percent={"20"}
+      percent={"29"}
       onClick={async () => {
         await confirmOTP({
           otp: otp.join(""),

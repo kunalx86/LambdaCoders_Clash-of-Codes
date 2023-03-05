@@ -38,7 +38,7 @@ export default function OtpConfirmPage() {
               }
               key={sexuality}
               className={`flex flex-row border-2 border-slate-200 p-4 hover:bg-brand.green.dark hover:text-white hover:rounded-xl rounded-2xl justify-between items-center
-                ${selectedSexuality.includes(interest) ? "bg-brand.green.dark text-white hover:bg-white hover:text-black" : ""}
+                ${selectedSexuality.includes(sexuality) ? "bg-brand.green.dark text-white hover:bg-white hover:text-black" : ""}
               `}
             >
               <h3 className="text-lg">{sexuality}</h3>

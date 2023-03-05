@@ -9,11 +9,11 @@ export default function PhonePage() {
   const router = useRouter();
   return (
     <CommonScreen
-      percent={"10"}
+      percent={"14.5"}
       onClick={async () => {
         localStorage.setItem("phone", phoneNo)
         await loginWithPhone({
-          phoneNo: "+91" + phoneNo.split(" ").join(""),
+          phoneNo: parseInt("+91" + phoneNo.split(" ").join("")),
         });
         router.push("/create/otp-confirm");
       }}
