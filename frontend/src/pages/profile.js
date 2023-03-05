@@ -10,13 +10,15 @@ export default function ProfilPage() {
             </h1> */}
 
             <div className="profile-photo-container">
-                <img className = {styles.profile_image} src="https://edge.99images.com/photos/wallpapers/music/shirley-setia%20android-iphone-desktop-hd-backgrounds-wallpapers-1080p-4k-hr1ju.jpg" alt="React Image" />
+                <img className = {styles.profile_image} id="userProfileImage" src="/icons/profile-photo.PNG" alt="React Image" />
             </div>
+
+            
 
             <div className={styles.sub_container}>
             <div className = {styles.element_container}>
-                <div className={styles.name} id="name"> Shirley Setia</div>
-                <div className={styles.job} id="profession">Singer Actor</div>    
+                <div className={styles.name} id="name"> Jessica Parker</div>
+                <div className={styles.job} id="profession">Model, Actor</div>    
             </div>
 
             <div className={styles.element_container}>
@@ -27,14 +29,10 @@ export default function ProfilPage() {
             <div className= {styles.element_container}>
                 <div className={styles.location_flex}>
                     <div className= {styles.header}>Location</div>
-                    <div className={styles.pin_container} align = "right">
-                        <ImLocation className= {styles.locationPin}/>
-                        <div className={styles.distance} id="location_radius">1 KM</div>
-
+                    <div className={styles.pin_container} align = "right">    
                     </div>
                 </div> 
                 <div className= {styles.subtext} id = 'location' > Mumbai, Maharashtra India </div>
-
             </div>
             <div className= {styles.element_container}>
                 <div className = {styles.header}>Interest</div>
