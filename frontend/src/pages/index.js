@@ -5,12 +5,35 @@ import Image from "next/image";
 import Footer from "@/components/Footer";
 import CommonScreen from "@/components/CommonScreen";
 import { useAuth } from "@/providers/AuthProvider";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useMutation, useQuery } from "react-query";
+import { axios, axiosFlask } from "@/axios";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const MatchView = () => {
+  const { user } = useAuth();
+  const [index, setIndex] = useState(0);
+  const { isLoading, data } = useQuery(
+    ["matches", user?.phoneNumber || "9876543210"],
+    () =>
+      axios.get(`/user/suggestedUsers/${9876543210}`).then((res) => res.data),
+    {
+      refetchOnWindowFocus: false
+    }
+  );
+  const { mutateAsync } = useMutation((data) =>
+    axios.post("/user/dislike", data)
+  );
+  const { mutateAsync: mutateLikeAsync } = useMutation((data) =>
+    axios.post("/user/like", data)
+  );
+  if (isLoading || !data) {
+    return <>Loading...</>;
+  }
+  const currentUser = data[index];
+  console.log(currentUser);
   return (
     <>
       {/* Header */}
@@ -32,16 +55,18 @@ const MatchView = () => {
       {/* Main body */}
       <div className="flex justify-center items-center flex-col mt-4">
         <div className="relative w-[327px] h-[495px]">
-          <Image
+          <img
             className="self-center object-cover rounded-2xl shadow-2xl"
             alt="name"
-            src={"/icons/IMG.png"}
+            src={currentUser.photos[0]}
             width={327}
             height={495}
           />
-          <div className="absolute text-white top-[352px] left-[16px] h-[89px] w-[191px]">
+          <div className="absolute text-black top-[352px] left-[16px] h-[89px] w-[191px]">
             <div className="flex flex-col">
-              <h1 className="text-3xl decoration-3 mb-1">Kalvin, 23</h1>
+              <h1 className="text-3xl decoration-3 mb-1">
+                {currentUser.firstName}, {currentUser.age}
+              </h1>
               <div className="flex flex-row items-center space-x-2">
                 <BiPin />
                 <h4>Mumbai</h4>
@@ -54,7 +79,13 @@ const MatchView = () => {
       {/* Buttons section */}
       <div className="p-8 items-center justify-center mx-[10%] flex flex-row">
         {/* <div className="flex flex-row"> */}
-        <div className="bg-white hover:shadow-2xl shadow-lg mx-4 rounded-full w-[60px] h-[60px]">
+        <div onClick={async e => {
+          await mutateAsync({
+            mobileNo: "9876543210",
+            userId: currentUser._id
+          })
+          setIndex(i => i + 1)
+        }} className="bg-white hover:shadow-2xl shadow-lg mx-4 rounded-full w-[60px] h-[60px]">
           <Image
             className="self-center mx-auto mt-5"
             src="/icons/dislike.PNG"
@@ -76,7 +107,13 @@ const MatchView = () => {
         </div>
         {/* </div> */}
         {/* <div className="flex flex-row"> */}
-        <div className="bg-white hover:shadow-2xl shadow-lg mx-4 rounded-full w-[60px] h-[60px]">
+        <div onClick={async e => {
+          await mutateLikeAsync({
+            mobileNo: "9876543210",
+            userId: currentUser._id
+          })
+          setIndex(i => i + 1)
+        }} className="bg-white hover:shadow-2xl shadow-lg mx-4 rounded-full w-[60px] h-[60px]">
           <Image
             className="self-center mx-auto mt-5"
             src="/icons/like.PNG"
@@ -96,12 +133,12 @@ const MatchView = () => {
 export default function Home() {
   const { isLoggedIn } = useAuth();
   const router = useRouter();
-  useEffect(() => {
-    console.log(isLoggedIn)
-    if (!isLoggedIn) {
-      router.push("/create/phone")
-    }
-  }, [isLoggedIn])
+  // useEffect(() => {
+  //   console.log(isLoggedIn)
+  //   if (!isLoggedIn) {
+  //     router.push("/create/phone")
+  //   }
+  // }, [isLoggedIn])
   return (
     <>
       <Head>

@@ -1,32 +1,19 @@
 import { useAuth } from "@/providers/AuthProvider";
 import CommonScreen from "@/components/CommonScreen";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
-import { URL } from "../../../axios";
 
 export default function OtpConfirmPage() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const router = useRouter();
-  const data = useAuth()?.user;
-
-
-
   return (
     <CommonScreen
-      percent={"30"}
+      percent={"43"}
       onClick={async () => {
         localStorage.setItem("firstname", firstname)
         localStorage.setItem("lastname", lastname)
-        axios.post(URL + "/editProfile", { firstName: firstname, lastName: lastname, mobileNo: parseInt(data.phoneNumber) }).then((res) => {
-          console.log(res);
-          router.push("/create/dob");
-        }).catch((err) => {
-          console.log(err)
-        })
-
-
+        router.push("/create/dob");
       }}
     >
       <div className="flex flex-col p-4">

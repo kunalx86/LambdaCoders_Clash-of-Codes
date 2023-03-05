@@ -19,10 +19,10 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const auth = initializeAuth(app);
+auth.setPersistence(browserSessionPersistence)
 
 
 if (typeof window !== "undefined") {
-  auth.setPersistence(browserSessionPersistence)
   window.recaptchaVerifier = new RecaptchaVerifier(
     "captcha",
     {

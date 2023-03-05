@@ -3,27 +3,19 @@ import CommonScreen from "@/components/CommonScreen";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { Datepicker } from "@mobiscroll/react";
-import { URL } from "../../../axios";
 import "@mobiscroll/react/dist/css/mobiscroll.min.css";
-import axios from "axios";
 
 export default function OtpConfirmPage() {
   const { confirmOTP } = useAuth();
   const [date, setDate] = useState()
   const router = useRouter();
-  const data = useAuth()?.user;
   return (
     <CommonScreen
-      percent={"40"}
+      percent={"58"}
       onClick={async () => {
         console.log(date)
         localStorage.setItem("dob", JSON.stringify(date));
-        axios.post(URL + "/editProfile", { DOB: date, mobileNo: parseInt(data.phoneNumber) }).then((res) => {
-          console.log(res);
-          router.push("/create/gender");
-        }).catch((err) => {
-          console.log(err)
-        })
+        router.push("/create/gender");
       }}
     >
       <div className="flex flex-col p-4">
