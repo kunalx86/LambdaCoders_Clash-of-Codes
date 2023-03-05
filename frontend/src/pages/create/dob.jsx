@@ -14,7 +14,7 @@ export default function OtpConfirmPage() {
   const data = useAuth()?.user;
   return (
     <CommonScreen
-      percent={"40"}
+      percent={"58"}
       onClick={async () => {
         console.log(date)
         localStorage.setItem("dob", JSON.stringify(date));

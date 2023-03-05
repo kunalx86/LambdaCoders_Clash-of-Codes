@@ -15,7 +15,7 @@ export default function OtpConfirmPage() {
 
   return (
     <CommonScreen
-      percent={"30"}
+      percent={"43"}
       onClick={async () => {
         localStorage.setItem("firstname", firstname)
         localStorage.setItem("lastname", lastname)

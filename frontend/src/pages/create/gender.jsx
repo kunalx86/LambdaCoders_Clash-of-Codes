@@ -16,7 +16,7 @@ export default function OtpConfirmPage() {
 
   return (
     <CommonScreen
-      percent={"40"}
+      percent={"72.5"}
       onClick={async () => {
         localStorage.setItem("gender", selectedGender)
         axios.post(URL + "/editProfile", { gender: selectedGender.toLowerCase(), mobileNo: parseInt(data.phoneNumber) }).then((res) => {

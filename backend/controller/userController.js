@@ -33,6 +33,7 @@ export const editProfile = async (req, res) => {
         const data = req.body;
         console.log(data)
 
+<<<<<<< HEAD
         if (data.location) {
 
             data.location = JSON.parse(req.body.location)
@@ -40,6 +41,15 @@ export const editProfile = async (req, res) => {
         if (data.ageRange) {
             data.ageRange = JSON.parse(req.body.ageRange)
         }
+=======
+        // if (data.location) {
+
+        //     data.location = JSON.parse(req.body.location)
+        // }
+        // if (data.ageRange) {
+        //     data.ageRange = JSON.parse(req.body.ageRange)
+        // }
+>>>>>>> main
         // if (data.sexualOrientation) {
         //     data.sexualOrientation = JSON.parse(req.body.sexualOrientation)
         // }

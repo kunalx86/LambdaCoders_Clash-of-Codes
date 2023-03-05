@@ -27,7 +27,7 @@ export default function OtpConfirmPage() {
   const data = useAuth()?.user;
   return (
     <CommonScreen
-      percent={"40"}
+      percent={"72.5"}
       onClick={async () => {
         // router.push("/");
         localStorage.setItem("interests", selectedInterests)
@@ -48,14 +48,20 @@ export default function OtpConfirmPage() {
         <div className="grid grid-cols-2 gap-2 mx-[10%] mt-4">
           {interests.map((interest) => (
             <div
-              onClick={e => {
-                selectedInterests.includes(interest) ?
-                  setSelectedInterests(s => s.filter(intrst => intrst !== interest)) :
-                  setSelectedInterests(s => [...s, interest])
+              onClick={(e) => {
+                selectedInterests.includes(interest)
+                  ? setSelectedInterests((s) =>
+                      s.filter((intrst) => intrst !== interest)
+                    )
+                  : setSelectedInterests((s) => [...s, interest]);
               }}
               key={interest}
               className={`flex flex-row border-2 border-slate-200 p-4 hover:bg-brand.green.dark hover:text-white hover:rounded-xl rounded-2xl justify-between items-center
-                ${selectedInterests.includes(interest) ? "bg-brand.green.dark text-white hover:bg-white hover:text-black" : ""}
+                ${
+                  selectedInterests.includes(interest)
+                    ? "bg-brand.green.dark text-white hover:bg-white hover:text-black"
+                    : ""
+                }
               `}
             >
               <h3 className="text-lg">{interest}</h3>
