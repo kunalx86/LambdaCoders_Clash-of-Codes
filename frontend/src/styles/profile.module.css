@@ -62,3 +62,22 @@
     margin-bottom: 4vh;
 
 }
+.background{
+    width: 100vw !important;
+    height: 100vh;
+}
+.get_started{
+    width: 80vw;
+    height: 7vh;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ffff;
+    border-radius: 10px;
+    color: #2AAC7A;
+    font-size: 18px;
+    position: absolute;
+    top: 87vh;
+    right: auto;
+    left:50px;
+        
+}
