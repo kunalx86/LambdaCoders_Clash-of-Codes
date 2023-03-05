@@ -2,6 +2,8 @@ import { useAuth } from "@/providers/AuthProvider";
 import CommonScreen from "@/components/CommonScreen";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { URL } from "../../../axios";
+import axios from "axios";
 
 const sexualities = [
   "Prefer Not to Say",
@@ -16,12 +18,18 @@ const sexualities = [
 export default function OtpConfirmPage() {
   const router = useRouter();
   const [selectedSexuality, setSelectedSexuality] = useState([]);
+  const data = useAuth()?.user;
   return (
     <CommonScreen
       percent={"40"}
       onClick={async () => {
         localStorage.setItem("sexuality", JSON.stringify(selectedSexuality));
-        router.push("/create/interests");
+        axios.post(URL + "/editProfile", { sexualOrientation: selectedSexuality, mobileNo: parseInt(data.phoneNumber) }).then((res) => {
+          console.log(res);
+          router.push("/create/interests");
+        }).catch((err) => {
+          console.log(err)
+        })
       }}
     >
       <div className="flex flex-col p-4">
@@ -32,13 +40,13 @@ export default function OtpConfirmPage() {
               onClick={(e) =>
                 selectedSexuality.includes(sexuality)
                   ? setSelectedSexuality((s) =>
-                      s.filter((sx) => sx !== sexuality)
-                    )
+                    s.filter((sx) => sx !== sexuality)
+                  )
                   : setSelectedSexuality((s) => [...s, sexuality])
               }
               key={sexuality}
               className={`flex flex-row border-2 border-slate-200 p-4 hover:bg-brand.green.dark hover:text-white hover:rounded-xl rounded-2xl justify-between items-center
-                ${selectedSexuality.includes(interest) ? "bg-brand.green.dark text-white hover:bg-white hover:text-black" : ""}
+                ${selectedSexuality.includes(sexuality) ? "bg-brand.green.dark text-white hover:bg-white hover:text-black" : ""}
               `}
             >
               <h3 className="text-lg">{sexuality}</h3>

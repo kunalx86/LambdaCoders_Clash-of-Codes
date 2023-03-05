@@ -7,6 +7,8 @@ import { Datepicker } from "@mobiscroll/react";
 import Modal from "react-modal"
 import "@mobiscroll/react/dist/css/mobiscroll.min.css";
 import { Slider, Box } from "@mui/material";
+import { BiChevronRight } from "react-icons/bi";
+import axios from "axios";
 
 
 const sexualities = [
@@ -16,8 +18,9 @@ const sexualities = [
     "Lesbian",
     "Bisexual",
     "Allosexual",
-    "Androsexual"
-]
+    "Androsexual",
+];
+const genders = ["Man", "Woman", "Prefer Not to Say"];
 const customStyles = {
     content: {
         top: '50%',
@@ -31,6 +34,7 @@ const customStyles = {
     },
 };
 export default function OtpConfirmPage() {
+    const [images, setImages] = useState(["", "", ""]);
     const [formData, setFormData] = useState({
         firstName: "oooppp",
         lastName: "sanghvi",
@@ -39,12 +43,39 @@ export default function OtpConfirmPage() {
         bio: "Clash of hearts",
         ageRange: [18, 30],
         radius: 5,
+        gender: "Man",
+        sexualities: ["Straight"],
         photos: ["https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80", "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80", "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80"]
 
     })
     const [open, setOpen] = useState(false);
     const [selected, setSelected] = useState("fn")
     const router = useRouter();
+    const handleImages = (e, index) => {
+        images[index] = e.target.files[0];
+        setImages(images)
+
+    }
+    const uploadImage = async () => {
+        try {
+            const data = new FormData();
+            for (let i = 0; i < 3; i++) {
+                if (images[i] !== "") {
+                    data.append("image" + i, images[i]);
+                }
+            }
+            data.append("mobileNo", 9876543201);
+            await axios.post("http://localhost:9000/user/addPhotos", data).then((_res) => {
+                console.log(_res)
+            }).catch(err => {
+                console.log(err)
+            })
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
     return (
         <>
             <Modal Modal
@@ -77,17 +108,29 @@ export default function OtpConfirmPage() {
                             required
                         />
                     ) : (
-                        <div className="mt-2">
-                            <input type="file" onChange={() => { }} />
-                            <button onClick={() => { }}>
-                                Upload!
-                            </button>
-                        </div>
+                        <>
+                            <div className="flex">
+                                <div className="mt-2">
+                                    <input type="file" onChange={(e) => { handleImages(e, 0) }} name="file1" />
+                                    <input type="file" onChange={(e) => { handleImages(e, 1) }} name="file2" />
+                                    <input type="file" onChange={(e) => { handleImages(e, 2) }} name="file3" />
+                                </div>
+
+
+                            </div>
+
+
+
+                        </>
+
 
                     )}
                 </form>
-                <button className="bg-white text-brand.green border mt-3 text-lg rounded-lg p-2" onClick={() => setOpen(false)}>close</button>
-            </Modal >
+                <div className="justify-between">
+                    <button className="bg-white text-brand.green border mt-5 mr-4 text-lg rounded-lg p-2" onClick={() => setOpen(false)}>close</button>
+                    {selected === "image" ? (<button className="text-white bg-brand.green border mt-3 text-lg rounded-lg p-2" onClick={() => uploadImage()}>Submit</button>) : ""}
+                </div>
+            </Modal>
             <div className="flex p-4 ">
                 <h1 className="text-4xl font-bold text-left">Profile strength</h1>
             </div>
@@ -159,15 +202,21 @@ export default function OtpConfirmPage() {
                     </div>
                     {/* gender */}
                     <div className="bg-slate-50 mt-7 border rounded-md drop-shadow-lg shadow-black">
+
                         <div className="flex flex-col p-4">
-                            <h1 className="text-4xl font-bold">What's your sexuality?</h1>
-                            <div className="flex flex-col space-y-4 mx-auto">
-                                {
-                                    sexualities.map(sexuality => (
-                                        <div key={sexuality} className="border-b-gray-400">
-                                        </div>
-                                    ))
-                                }
+                            <h1 className="flex-1 font-bold text-xl m-5 ml-3">What's your gender?</h1>
+                            <div className="flex flex-col space-y-4 mx-[10%] mt-4">
+                                {genders.map((gender) => (
+                                    <div
+                                        key={gender}
+                                        className={`flex flex-row border-2 border-slate-200 p-4 hover:bg-brand.green.dark hover:text-white hover:rounded-xl rounded-2xl justify-between items-center
+              ${formData.gender === gender ? "bg-brand.green.dark text-white hover:bg-white hover:text-black" : ""}`}
+                                        onClick={e => setFormData({ ...formData, gender: gender })}
+                                    >
+                                        <h3 className="text-lg">{gender}</h3>
+                                        <span><BiChevronRight /></span>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -191,9 +240,37 @@ export default function OtpConfirmPage() {
                         </div>
                     </div>
 
-                    {/* interests */}
 
                     {/* sexualOrientation */}
+                    <div className="bg-slate-50 mt-7 border rounded-md drop-shadow-lg shadow-black">
+
+                        <div className="flex flex-col p-4">
+                            <h1 className="flex-1 font-bold text-xl m-5 ml-3">What's your sexuality?</h1>
+                            <div className="flex flex-col space-y-4 mx-[10%] mt-4">
+                                {sexualities.map((sexuality) => (
+                                    <div
+                                        onClick={(e) =>
+                                            formData.sexualities.includes(sexuality)
+                                                ? setFormData({ ...formData, sexualities: formData.sexualities.filter((sx) => sx !== sexuality) })
+                                                : setFormData({ ...formData, sexualities: [...formData.sexualities, sexuality] })
+                                        }
+                                        key={sexuality}
+                                        className={`flex flex-row border-2 border-slate-200 p-4 hover:bg-brand.green.dark hover:text-white hover:rounded-xl rounded-2xl justify-between items-center
+                ${formData.sexualities.includes(sexuality) ? "bg-brand.green.dark text-white hover:bg-white hover:text-black" : ""}
+              `}
+                                    >
+                                        <h3 className="text-lg">{sexuality}</h3>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    {/* interests */}
 
 
                     {/* slider for age and distance */}

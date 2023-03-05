@@ -1,8 +1,10 @@
 import CommonScreen from "@/components/CommonScreen";
 import { useState } from "react";
 import { useRouter } from "next/router";
-
+import { URL } from "../../../axios";
+import axios from "axios";
 const genders = ["Man", "Woman", "Prefer Not to Say"];
+import { useAuth } from "@/providers/AuthProvider";
 
 const interests = [
   "Camping 🏕️",
@@ -22,11 +24,19 @@ const interests = [
 export default function OtpConfirmPage() {
   const router = useRouter();
   const [selectedInterests, setSelectedInterests] = useState([])
+  const data = useAuth()?.user;
   return (
     <CommonScreen
       percent={"40"}
       onClick={async () => {
         // router.push("/");
+        localStorage.setItem("interests", selectedInterests)
+        axios.post(URL + "/editProfile", { interests: selectedInterests, mobileNo: parseInt(data.phoneNumber) }).then((res) => {
+          console.log(res);
+          router.push("/");
+        }).catch((err) => {
+          console.log(err)
+        })
       }}
     >
       <div className="flex flex-col p-4">
