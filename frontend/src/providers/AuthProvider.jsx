@@ -1,7 +1,7 @@
 import { auth } from "@/firebase";
-import { getAuth, onAuthStateChanged, signInWithPhoneNumber } from "@firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithPhoneNumber } from "@firebase/auth";
 
-const { createContext, useState, useEffect, useContext } = require("react");
+import { createContext, useState, useEffect, useContext } from "react";
 
 const AuthContext = createContext({
   user: null,
@@ -30,9 +30,7 @@ export default function AuthProvider({ children }) {
   }, []);
 
   const loginWithPhone = async ({ phoneNo }) => {
-    console.log(auth.verify)
-    console.log(phoneNo)
-    const confirmationresult = await signInWithPhoneNumber(auth, phoneNo);
+    const confirmationresult = await signInWithPhoneNumber(auth, phoneNo, window.recaptchaVerifier);
     window.confirmationresult = confirmationresult;
   };
 

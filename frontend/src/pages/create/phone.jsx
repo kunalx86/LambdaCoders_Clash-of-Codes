@@ -12,7 +12,7 @@ export default function PhonePage() {
       await loginWithPhone({
         phoneNo: "+91" + phoneNo.split(" ").join("")
       });
-      router.push("/otp-confirm")
+      router.push("/create/otp-confirm")
     }}>
       <div className="flex flex-col p-4">
         <h1 className="text-4xl font-bold">What's your Phone Number?</h1>
