@@ -32,16 +32,16 @@ export const editProfile = async (req, res) => {
         const { mobileNo } = req.body;
         const data = req.body;
 
-        if (data.location) {
+        // if (data.location) {
 
-            data.location = JSON.parse(req.body.location)
-        }
-        if (data.ageRange) {
-            data.ageRange = JSON.parse(req.body.ageRange)
-        }
-        if (data.sexualOrientation) {
-            data.sexualOrientation = JSON.parse(req.body.sexualOrientation)
-        }
+        //     data.location = JSON.parse(req.body.location)
+        // }
+        // if (data.ageRange) {
+        //     data.ageRange = JSON.parse(req.body.ageRange)
+        // }
+        // if (data.sexualOrientation) {
+        //     data.sexualOrientation = JSON.parse(req.body.sexualOrientation)
+        // }
 
         if (data.DOB) {
             data.age = calculate_age(new Date(data.DOB.slice(0, 10)))

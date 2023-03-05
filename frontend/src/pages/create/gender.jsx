@@ -11,7 +11,7 @@ export default function OtpConfirmPage() {
   const [selectedGender, setSelectedGender] = useState("");
   return (
     <CommonScreen
-      percent={"40"}
+      percent={"72.5"}
       onClick={async () => {
         localStorage.setItem("gender", selectedGender)
         router.push("/create/sexuality");
