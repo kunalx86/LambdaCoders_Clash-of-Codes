@@ -97,6 +97,7 @@ export default function Home() {
   const { isLoggedIn } = useAuth();
   const router = useRouter();
   useEffect(() => {
+    console.log(isLoggedIn)
     if (!isLoggedIn) {
       router.push("/create/phone")
     }

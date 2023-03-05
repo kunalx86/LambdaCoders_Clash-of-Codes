@@ -22,7 +22,6 @@ export default function OtpConfirmPage() {
         // await confirmOTP({
         //   otp: otp.join(""),
         // });
-        console.log(date)
         router.push("/create/interests");
       }}
     >
@@ -31,7 +30,7 @@ export default function OtpConfirmPage() {
         <div className="flex flex-col space-y-4 mx-[10%] mt-4">
           {
             sexualities.map(sexuality => (
-              <div key={sexuality} className="border-b-2 border-b-gray-400 p-2 hover:border-2 hover:border-gray-400 hover:rounded-lg">
+              <div key={sexuality} className="border-2 border-l-white border-r-white border-t-white border-b-gray-400 p-2 hover:border-2 hover:border-gray-400 hover:rounded-lg">
                 <h3 className="text-lg">{sexuality}</h3>
               </div>
             ))

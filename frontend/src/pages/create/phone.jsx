@@ -23,14 +23,14 @@ export default function PhonePage() {
         <div className="flex flex-row space-x-4 mx-auto">
           <input
             placeholder="+91"
-            className="border-solid bg-slate-100 border-b-4 border-gray-600 hover:border-black h-[38px] w-[60px] text-2xl"
+            className="border-solid bg-slate-100 border-b-4 border-gray-600 hover:border-black h-[38px] w-[52px] text-2xl"
           />
           <input
             type="text"
             value={phoneNo}
             placeholder="91823 67123"
             onChange={(e) => setPhoneNo(e.target.value)}
-            className="border-solid bg-slate-100 border-b-4 border-gray-600 hover:border-black h-[38px] w-[150px] text-2xl"
+            className="border-solid bg-slate-100 border-b-4 border-gray-600 hover:border-black h-[38px] w-[140px] text-2xl"
           />
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { auth } from "@/firebase";
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithPhoneNumber } from "@firebase/auth";
+import { onAuthStateChanged, signInWithPhoneNumber } from "@firebase/auth";
 
 import { createContext, useState, useEffect, useContext } from "react";
 
